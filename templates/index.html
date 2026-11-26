@@ -1,0 +1,85 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto IA</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .contenedor {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 500px;
+            margin: auto;
+        }
+
+        input {
+            width: 90%;
+            padding: 12px;
+            margin: 15px 0;
+        }
+
+        button {
+            padding: 12px 25px;
+            background: #3978d6;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        #respuesta {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="contenedor">
+        <h1>Proyecto IA</h1>
+        <p>Escribe tu pregunta para la inteligencia artificial</p>
+
+        <input type="text" id="mensaje" placeholder="Escribe aquí...">
+
+        <br>
+
+        <button onclick="consultarIA()">Enviar</button>
+
+        <div id="respuesta"></div>
+    </div>
+
+    <script>
+        async function consultarIA() {
+            let mensaje = document.getElementById("mensaje").value;
+
+            let resultado = await fetch("/ia", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+            },
+                body: JSON.stringify({
+                    mensaje: mensaje
+                })
+            });
+
+            let datos = await resultado.json();
+
+            document.getElementById("respuesta").innerText =
+                datos.respuesta;
+        }
+    </script>
+
+</body>
+</html>
+
+

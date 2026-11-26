@@ -1,10 +1,10 @@
 from fastapi import FastAPI
-
+from fastapi.responses import FileResponse
 app = FastAPI(title="Proyecto IA")
 
 @app.get("/")
 def inicio():
-    return {"mensaje": "Mi API de inteligencia artificial funciona"}
+    return FileResponse("templates/index.html")
 
 @app.get("/salud")
 def salud():
